@@ -11,7 +11,7 @@ class PersonModel extends PersonEntity {
     required super.gender,
     required super.origin,
     required super.location,
-    required super.img,
+    required super.image,
     required super.episode,
     required super.created,
   });
@@ -24,13 +24,9 @@ class PersonModel extends PersonEntity {
       species: json['species'],
       type: json['type'],
       gender: json['gender'],
-      origin: json['origin'] != null
-          ? LocationModel.fromJson(json['origin'])
-          : null,
-      location: json['location'] != null
-          ? LocationModel.fromJson(json['location'])
-          : null,
-      img: json['img'],
+      origin: LocationModel.fromJson(json['origin']),
+      location: LocationModel.fromJson(json['location']),
+      image: json['image'],
       episode: (json['episode'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -48,9 +44,9 @@ class PersonModel extends PersonEntity {
       'gender': gender,
       'origin': origin,
       'location': location,
-      'img': img,
+      'img': image,
       'episode': episode,
-      'created': created,
+      'created': created.toIso8601String(),
     };
   }
 }

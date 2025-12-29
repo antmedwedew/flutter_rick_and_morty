@@ -26,10 +26,10 @@ class PersonLoading extends PersonState {
   List<Object?> get props => [oldPersonsList];
 }
 
-class PersonsLoaded extends PersonState {
+class PersonLoaded extends PersonState {
   final List<PersonEntity> personsList;
 
-  const PersonsLoaded({required this.personsList});
+  const PersonLoaded({required this.personsList});
 
   @override
   List<Object?> get props => [personsList];

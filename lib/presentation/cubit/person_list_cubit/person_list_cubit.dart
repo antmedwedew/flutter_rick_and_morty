@@ -9,27 +9,29 @@ class PersonListCubit extends Cubit<PersonState> {
 
   PersonListCubit({required this.getAllPersons}) : super(PersonEmpty());
 
+  int page = 1;
+
   void loadPerson() async {
     if (state is PersonLoading) return;
 
     final PersonState currentState = state;
     var oldPerson = <PersonEntity>[];
-    int page = 1;
 
-    if (currentState is PersonsLoaded) {
+    if (currentState is PersonLoaded) {
       oldPerson = currentState.personsList;
     }
 
     emit(PersonLoading(oldPersonsList: oldPerson, isFirstFetch: page == 1));
 
     final faiureOrPerson = await getAllPersons(PagePersonParams(page: page));
+
     faiureOrPerson.fold(
-      (failure) => PersonError(message: _mapFailuretoMessage(failure)),
+      (failure) => emit(PersonError(message: _mapFailuretoMessage(failure))),
       (person) {
         page++;
         final personsList = (state as PersonLoading).oldPersonsList;
         personsList.addAll(person);
-        emit(PersonsLoaded(personsList: personsList));
+        emit(PersonLoaded(personsList: personsList));
       },
     );
   }

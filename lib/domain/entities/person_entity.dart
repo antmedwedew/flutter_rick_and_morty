@@ -8,9 +8,9 @@ class PersonEntity extends Equatable {
   final String species;
   final String type;
   final String gender;
-  final LocationEntity? origin;
-  final LocationEntity? location;
-  final String img;
+  final LocationEntity origin;
+  final LocationEntity location;
+  final String image;
   final List<String> episode;
   final DateTime created;
 
@@ -21,9 +21,9 @@ class PersonEntity extends Equatable {
     required this.species,
     required this.type,
     required this.gender,
-    this.origin,
-    this.location,
-    required this.img,
+    required this.origin,
+    required this.location,
+    required this.image,
     required this.episode,
     required this.created,
   });
@@ -38,7 +38,7 @@ class PersonEntity extends Equatable {
     gender,
     origin,
     location,
-    img,
+    image,
     episode,
     created,
   ];
