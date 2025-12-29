@@ -7,28 +7,28 @@ import 'package:flutter_rick_and_morty/presentation/bloc/search_bloc/search_stat
 class PersonSearchBloc extends Bloc<PersonSearchEvent, PersonSearchState> {
   final SearchPerson searchPerson;
 
-  PersonSearchBloc({required this.searchPerson}) : super(PersonSearchEmpty());
-
-  Stream<PersonSearchState> mapEventToState(PersonSearchEvent event) async* {
-    if (event is SearchPersons) {
-      yield* _mapFetchPersonsToState(event.personQuery);
-    }
+  PersonSearchBloc({required this.searchPerson}) : super(PersonSearchEmpty()) {
+    on<SearchPersons>(_onSearchPersons);
   }
 
-  Stream<PersonSearchState> _mapFetchPersonsToState(String personQuery) async* {
-    yield PersonSearchLoading();
+  Future<void> _onSearchPersons(
+    SearchPersons event,
+    Emitter<PersonSearchState> emit,
+  ) async {
+    emit(PersonSearchLoading());
 
     final failureOrPerson = await searchPerson(
-      SearchPersonParams(query: personQuery),
+      SearchPersonParams(query: event.personQuery),
     );
 
-    yield failureOrPerson.fold(
-      (failure) => PersonSearchError(message: _mapFailuretoMessage(failure)),
-      (persons) => PersonSearchLoaded(persons: persons),
+    failureOrPerson.fold(
+      (failure) =>
+          emit(PersonSearchError(message: _mapFailureToMessage(failure))),
+      (person) => emit(PersonSearchLoaded(persons: person)),
     );
   }
 
-  String _mapFailuretoMessage(Failure failure) {
+  String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure _:
         return 'Server error';
