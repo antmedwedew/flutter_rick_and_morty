@@ -1,16 +1,23 @@
-# flutter_rick_and_morty
+# Rick and Morty Universe (Flutter)
 
-A new Flutter project.
+Мобильное приложение для просмотра информации о персонажах, локациях и эпизодах вселенной "Рика и Морти", построенное на Flutter
 
-## Getting Started
+### **Основной стек**
+*   **Flutter 3.x**
+*   **Dart** 
 
-This project is a starting point for a Flutter application.
+### **Архитектура & State Management**
+*   **Clean Architecture** — проект структурирован по слоям (Data, Domain, Presentation) для разделения ответственности, обеспечения тестируемости и независимости от внешних фреймворков.
+*   **Bloc/Cubit** — для управления состоянием приложения.
+ 
+### **Сетевой слой & Данные**
+*   **Dio** — мощный HTTP-клиент для работы с REST API.
+*   **Rick and Morty API (https://rickandmortyapi.com)** — публичное API, используемое в качестве источника данных.
+*   **Repository Pattern** — абстракция над источниками данных (сеть, кэш), предоставляющая доменному слою единый интерфейс.
 
-A few resources to get you started if this is your first Flutter project:
+### **Платформы**
+Проект поддерживает сборку для **Android, iOS**.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Функциональность приложения
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*   **Персонажи**: Просмотр списка всех персонажей, поиск персонажа. Детальный просмотр информации о персонаже.
